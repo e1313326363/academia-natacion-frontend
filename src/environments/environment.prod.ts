@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'RAILWAY_URL_PLACEHOLDER/api'
+  apiUrl: 'https://web-production-3aea2.up.railway.app/api'
 };
