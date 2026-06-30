@@ -1,0 +1,49 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h4 class="fw-bold mb-0">Asistencias</h4><small class="text-muted">Control de asistencia a clases</small></div>
+  <a routerLink="nueva" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Registrar asistencia</a>
+</div>
+<div class="card table-card">
+  <div class="card-header bg-white py-3 d-flex gap-2">
+    <input type="date" class="form-control" style="max-width:200px" [(ngModel)]="fechaFiltro" (change)="load()">
+    <button class="btn btn-outline-secondary" *ngIf="fechaFiltro" (click)="fechaFiltro=''; load()">
+      <i class="bi bi-x"></i> Limpiar
+    </button>
+  </div>
+  <div class="text-center py-5" *ngIf="loading"><div class="spinner-border text-primary"></div></div>
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr><th>#</th><th>Estudiante</th><th>Clase</th><th>Fecha</th><th class="text-center">Asistió</th><th class="text-center">Acciones</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of data?.data">
+          <td class="text-muted small">{{ a.id_asistencia }}</td>
+          <td class="fw-semibold">{{ a.inscripcion?.estudiante?.nombre }}</td>
+          <td>{{ a.inscripcion?.clase?.nombre_clase }}</td>
+          <td>{{ a.fecha_clase | date:'dd/MM/yyyy' }}</td>
+          <td class="text-center">
+            <span class="badge rounded-pill px-3 py-2"
+              [class.badge-pagado]="a.asistio==='Si'"
+              [class.badge-vencido]="a.asistio==='No'">
+              <i class="bi" [class.bi-check-lg]="a.asistio==='Si'" [class.bi-x-lg]="a.asistio==='No'"></i>
+              {{ a.asistio }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(a.id_asistencia)"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+        <tr *ngIf="!data?.data?.length"><td colspan="6" class="text-center text-muted py-4">No hay registros de asistencia.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3" *ngIf="data">
+    <small class="text-muted">Total: {{ data.total }}</small>
+    <div class="d-flex gap-1">
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===1" (click)="load(data.current_page-1)"><i class="bi bi-chevron-left"></i></button>
+      <span class="btn btn-sm btn-primary disabled">{{ data.current_page }} / {{ data.last_page }}</span>
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===data.last_page" (click)="load(data.current_page+1)"><i class="bi bi-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+<app-confirm-dialog [visible]="showConfirm" (confirmed)="doDelete()" (cancelled)="showConfirm=false"></app-confirm-dialog>

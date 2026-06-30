@@ -1,0 +1,45 @@
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a routerLink="/clases" class="btn btn-sm btn-outline-secondary"><i class="bi bi-arrow-left"></i></a>
+  <div><h4 class="fw-bold mb-0">{{ editId ? 'Editar' : 'Nueva' }} Clase</h4><small class="text-muted">Configura la sesión de natación</small></div>
+</div>
+<div class="card border-0 shadow-sm" style="max-width:560px;border-radius:12px;">
+  <div class="card-body p-4">
+    <div class="text-center py-4" *ngIf="loading"><div class="spinner-border text-primary"></div></div>
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <div class="alert alert-danger py-2" *ngIf="error">{{ error }}</div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Nombre de la clase <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" formControlName="nombre_clase" [class.is-invalid]="f['nombre_clase'].invalid && f['nombre_clase'].touched">
+        <div class="invalid-feedback">El nombre es obligatorio.</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Nivel <span class="text-danger">*</span></label>
+        <select class="form-select" formControlName="id_nivel" [class.is-invalid]="f['id_nivel'].invalid && f['id_nivel'].touched">
+          <option [ngValue]="null">Selecciona un nivel…</option>
+          <option *ngFor="let n of niveles" [ngValue]="n.id_nivel">{{ n.nombre_nivel }}</option>
+        </select>
+        <div class="invalid-feedback">Selecciona un nivel.</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Instructor <span class="text-danger">*</span></label>
+        <select class="form-select" formControlName="id_instructor" [class.is-invalid]="f['id_instructor'].invalid && f['id_instructor'].touched">
+          <option [ngValue]="null">Selecciona un instructor…</option>
+          <option *ngFor="let i of instructores" [ngValue]="i.id_instructor">{{ i.nombre }}</option>
+        </select>
+        <div class="invalid-feedback">Selecciona un instructor.</div>
+      </div>
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Cupo máximo <span class="text-danger">*</span></label>
+        <input type="number" class="form-control" formControlName="cupo" min="1" max="50" [class.is-invalid]="f['cupo'].invalid && f['cupo'].touched">
+        <div class="invalid-feedback">Ingresa un cupo entre 1 y 50.</div>
+      </div>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary px-4" [disabled]="saving">
+          <span *ngIf="saving" class="spinner-border spinner-border-sm me-2"></span>
+          <i class="bi bi-check-lg me-1" *ngIf="!saving"></i>{{ saving ? 'Guardando...' : 'Guardar' }}
+        </button>
+        <a routerLink="/clases" class="btn btn-outline-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>

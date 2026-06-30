@@ -1,0 +1,37 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h4 class="fw-bold mb-0">Clases</h4><small class="text-muted">Sesiones de natación disponibles</small></div>
+  <a routerLink="nuevo" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Nueva clase</a>
+</div>
+<div class="card table-card">
+  <div class="text-center py-5" *ngIf="loading"><div class="spinner-border text-primary"></div></div>
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr><th>#</th><th>Nombre</th><th>Nivel</th><th>Instructor</th><th class="text-center">Cupo</th><th class="text-center">Acciones</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of data?.data">
+          <td class="text-muted small">{{ c.id_clase }}</td>
+          <td class="fw-semibold">{{ c.nombre_clase }}</td>
+          <td><span class="badge bg-primary bg-opacity-10 text-primary">{{ c.nivel?.nombre_nivel }}</span></td>
+          <td>{{ c.instructor?.nombre }}</td>
+          <td class="text-center">{{ c.cupo }}</td>
+          <td class="text-center">
+            <a [routerLink]="['editar', c.id_clase]" class="btn btn-sm btn-outline-primary me-1"><i class="bi bi-pencil"></i></a>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(c.id_clase)"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+        <tr *ngIf="!data?.data?.length"><td colspan="6" class="text-center text-muted py-4">No hay clases registradas.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3" *ngIf="data">
+    <small class="text-muted">Total: {{ data.total }}</small>
+    <div class="d-flex gap-1">
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===1" (click)="load(data.current_page-1)"><i class="bi bi-chevron-left"></i></button>
+      <span class="btn btn-sm btn-primary disabled">{{ data.current_page }} / {{ data.last_page }}</span>
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===data.last_page" (click)="load(data.current_page+1)"><i class="bi bi-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+<app-confirm-dialog [visible]="showConfirm" (confirmed)="doDelete()" (cancelled)="showConfirm=false"></app-confirm-dialog>

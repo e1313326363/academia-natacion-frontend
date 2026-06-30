@@ -1,0 +1,17 @@
+{
+  "status": "init",
+  "scope": "codebase",
+  "type": "frontend",
+  "localEndpoint": "http://localhost:4200/login",
+  "serverPort": 8493,
+  "executionArgs": {
+    "projectName": "frontend",
+    "projectPath": "C:\\Users\\ianve\\Desktop\\proyectos claude\\frontend",
+    "testIds": [],
+    "additionalInstruction": "The admin login credentials are: email=admin@academia.com, password=admin123. Use these exact credentials for all login steps in every test. Do NOT use password123 or any other password.",
+    "serverMode": "development",
+    "envs": {
+      "API_KEY": "sk-user-33Trco7v80pdhaAhVI4zYdRlGg3zb22G7v5cxPgHa7zhzoHWtRcHS81gn85Oot7BNmFp-zTEKcQk4Pkyc8zV3NJ2W2ljkHINrI1YgcbEuiams0_3Slxn84wjzME7EoeTlJk"
+    }
+  }
+}

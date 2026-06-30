@@ -1,0 +1,278 @@
+version: "2"
+type: frontend
+test_accounts:
+  - role: admin
+    email: admin@academia.com
+    password: admin123
+tech_stack:
+  - language: TypeScript
+  - framework: Angular 20
+  - ui_library: Bootstrap 5 + Bootstrap Icons
+  - other: Angular Reactive Forms, Angular Router, HttpClient, Laravel Sanctum (Bearer token auth)
+routes:
+  - path: /login
+    file: src/app/features/auth/login/login.ts
+    auth_required: false
+    description: Login page with email and password
+  - path: /dashboard
+    file: src/app/features/dashboard/dashboard/dashboard.ts
+    auth_required: true
+    description: Dashboard with stats cards and quick access links
+  - path: /estudiantes
+    file: src/app/features/estudiantes/lista-estudiantes/lista-estudiantes.ts
+    auth_required: true
+    description: List of students with search and pagination
+  - path: /estudiantes/nuevo
+    file: src/app/features/estudiantes/form-estudiante/form-estudiante.ts
+    auth_required: true
+    description: Form to create a new student
+  - path: /estudiantes/editar/:id
+    file: src/app/features/estudiantes/form-estudiante/form-estudiante.ts
+    auth_required: true
+    description: Form to edit an existing student
+  - path: /instructores
+    file: src/app/features/instructores/lista-instructores/lista-instructores.ts
+    auth_required: true
+    description: List of instructors with search and pagination
+  - path: /instructores/nuevo
+    file: src/app/features/instructores/form-instructor/form-instructor.ts
+    auth_required: true
+    description: Form to create a new instructor
+  - path: /instructores/editar/:id
+    file: src/app/features/instructores/form-instructor/form-instructor.ts
+    auth_required: true
+    description: Form to edit an existing instructor
+  - path: /clases
+    file: src/app/features/clases/lista-clases/lista-clases.ts
+    auth_required: true
+    description: List of swim classes
+  - path: /clases/nuevo
+    file: src/app/features/clases/form-clase/form-clase.ts
+    auth_required: true
+    description: Form to create a new class with level and instructor dropdowns
+  - path: /clases/editar/:id
+    file: src/app/features/clases/form-clase/form-clase.ts
+    auth_required: true
+    description: Form to edit an existing class
+  - path: /inscripciones
+    file: src/app/features/inscripciones/lista-inscripciones/lista-inscripciones.ts
+    auth_required: true
+    description: List of enrollments with status filter
+  - path: /inscripciones/nueva
+    file: src/app/features/inscripciones/form-inscripcion/form-inscripcion.ts
+    auth_required: true
+    description: Form to create a new enrollment
+  - path: /pagos
+    file: src/app/features/pagos/lista-pagos/lista-pagos.ts
+    auth_required: true
+    description: List of payments with status filter
+  - path: /pagos/nuevo
+    file: src/app/features/pagos/form-pago/form-pago.ts
+    auth_required: true
+    description: Form to register a new payment
+  - path: /asistencias
+    file: src/app/features/asistencias/lista-asistencias/lista-asistencias.ts
+    auth_required: true
+    description: List of attendance records with date filter
+  - path: /asistencias/nueva
+    file: src/app/features/asistencias/form-asistencia/form-asistencia.ts
+    auth_required: true
+    description: Form to register attendance for an enrollment
+features:
+  - name: User Login
+    description: Login with email and password using Laravel Sanctum token auth
+    files:
+      - src/app/features/auth/login/login.ts
+      - src/app/core/services/auth.service.ts
+      - src/app/core/interceptors/auth.interceptor.ts
+    entry_route: /login
+    user_interactions:
+      - Fill email input field
+      - Fill password input field
+      - Click Ingresar button to submit
+      - See error message on invalid credentials
+      - Redirect to /dashboard on success
+    api_calls:
+      - method: POST
+        endpoint: /api/login
+    auth_required: false
+  - name: Dashboard Stats
+    description: Shows total counts of students, instructors, classes and enrollments
+    files:
+      - src/app/features/dashboard/dashboard/dashboard.ts
+      - src/app/core/services/api.service.ts
+    entry_route: /dashboard
+    user_interactions:
+      - View stat cards with counts
+      - Click quick access links to navigate to sections
+    api_calls:
+      - method: GET
+        endpoint: /api/dashboard/stats
+    auth_required: true
+  - name: Student Management
+    description: Full CRUD for students with search, pagination, and delete confirmation
+    files:
+      - src/app/features/estudiantes/lista-estudiantes/lista-estudiantes.ts
+      - src/app/features/estudiantes/form-estudiante/form-estudiante.ts
+    entry_route: /estudiantes
+    user_interactions:
+      - Search students by name or email
+      - Click Nuevo estudiante to open create form
+      - Fill nombre, fecha_nacimiento, telefono, email fields
+      - Click Guardar to save
+      - Click pencil icon to edit a student
+      - Click trash icon and confirm to delete a student
+      - Navigate between pages with pagination buttons
+    api_calls:
+      - method: GET
+        endpoint: /api/estudiantes
+      - method: POST
+        endpoint: /api/estudiantes
+      - method: PUT
+        endpoint: /api/estudiantes/{id}
+      - method: DELETE
+        endpoint: /api/estudiantes/{id}
+    auth_required: true
+  - name: Instructor Management
+    description: Full CRUD for instructors
+    files:
+      - src/app/features/instructores/lista-instructores/lista-instructores.ts
+      - src/app/features/instructores/form-instructor/form-instructor.ts
+    entry_route: /instructores
+    user_interactions:
+      - Search instructors by name
+      - Click Nuevo instructor to open create form
+      - Fill nombre, especialidad, email fields
+      - Click Guardar to save
+      - Click pencil icon to edit
+      - Click trash icon and confirm to delete
+    api_calls:
+      - method: GET
+        endpoint: /api/instructores
+      - method: POST
+        endpoint: /api/instructores
+      - method: PUT
+        endpoint: /api/instructores/{id}
+      - method: DELETE
+        endpoint: /api/instructores/{id}
+    auth_required: true
+  - name: Class Management
+    description: Full CRUD for swim classes with level and instructor selection
+    files:
+      - src/app/features/clases/lista-clases/lista-clases.ts
+      - src/app/features/clases/form-clase/form-clase.ts
+    entry_route: /clases
+    user_interactions:
+      - Click Nueva clase button
+      - Fill nombre_clase field
+      - Select nivel from dropdown
+      - Select instructor from dropdown
+      - Set cupo (capacity) number
+      - Click Guardar to save
+      - Click trash icon and confirm to delete
+    api_calls:
+      - method: GET
+        endpoint: /api/clases
+      - method: GET
+        endpoint: /api/niveles
+      - method: GET
+        endpoint: /api/instructores
+      - method: POST
+        endpoint: /api/clases
+      - method: PUT
+        endpoint: /api/clases/{id}
+      - method: DELETE
+        endpoint: /api/clases/{id}
+    auth_required: true
+  - name: Enrollment Management
+    description: Create and manage student enrollments in classes with status control
+    files:
+      - src/app/features/inscripciones/lista-inscripciones/lista-inscripciones.ts
+      - src/app/features/inscripciones/form-inscripcion/form-inscripcion.ts
+    entry_route: /inscripciones
+    user_interactions:
+      - Filter enrollments by status (Activo, Suspendido, Baja)
+      - Click Nueva inscripcion button
+      - Select student from dropdown
+      - Select class from dropdown
+      - Set date and status
+      - Click Guardar to save
+      - Change enrollment status via inline dropdown
+      - Click trash icon and confirm to delete
+    api_calls:
+      - method: GET
+        endpoint: /api/inscripciones
+      - method: GET
+        endpoint: /api/estudiantes
+      - method: GET
+        endpoint: /api/clases
+      - method: POST
+        endpoint: /api/inscripciones
+      - method: PUT
+        endpoint: /api/inscripciones/{id}
+      - method: DELETE
+        endpoint: /api/inscripciones/{id}
+    auth_required: true
+  - name: Payment Management
+    description: Register and list payments for enrollments
+    files:
+      - src/app/features/pagos/lista-pagos/lista-pagos.ts
+      - src/app/features/pagos/form-pago/form-pago.ts
+    entry_route: /pagos
+    user_interactions:
+      - Filter payments by status (Pagado, Pendiente, Vencido)
+      - Click Registrar pago button
+      - Select enrollment from dropdown
+      - Enter monto (amount)
+      - Select metodo_pago (Efectivo, Tarjeta, Transferencia)
+      - Set fecha_pago and estado
+      - Click Guardar to save
+      - Click trash icon and confirm to delete
+    api_calls:
+      - method: GET
+        endpoint: /api/pagos
+      - method: GET
+        endpoint: /api/inscripciones
+      - method: POST
+        endpoint: /api/pagos
+      - method: DELETE
+        endpoint: /api/pagos/{id}
+    auth_required: true
+  - name: Attendance Management
+    description: Record and list student attendance per class session
+    files:
+      - src/app/features/asistencias/lista-asistencias/lista-asistencias.ts
+      - src/app/features/asistencias/form-asistencia/form-asistencia.ts
+    entry_route: /asistencias
+    user_interactions:
+      - Filter attendance by date
+      - Click Registrar asistencia button
+      - Select active enrollment from dropdown
+      - Pick fecha_clase date
+      - Select Si or No radio button for attendance
+      - Click Guardar to save
+      - Click trash icon and confirm to delete
+    api_calls:
+      - method: GET
+        endpoint: /api/asistencias
+      - method: GET
+        endpoint: /api/inscripciones
+      - method: POST
+        endpoint: /api/asistencias
+      - method: DELETE
+        endpoint: /api/asistencias/{id}
+    auth_required: true
+  - name: Logout
+    description: Log out and clear session token
+    files:
+      - src/app/shared/components/topbar/topbar.ts
+      - src/app/core/services/auth.service.ts
+    entry_route: /dashboard
+    user_interactions:
+      - Click Salir button in topbar
+      - Redirected to /login
+    api_calls:
+      - method: POST
+        endpoint: /api/logout
+    auth_required: true
+known_limitations: []

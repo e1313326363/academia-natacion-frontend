@@ -1,0 +1,1233 @@
+[
+  {
+    "id": "TC001",
+    "title": "Successful login and dashboard entry",
+    "description": "Verifies that an admin can sign in and reach the protected dashboard.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dashboard is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Log in and reach the dashboard",
+    "description": "Verifies an admin can sign in and land on the dashboard with academy overview content available.",
+    "category": "Authentication",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dashboard is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify academy stats are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Log out from the topbar",
+    "description": "This verifies that an admin can end the session from a protected page and return to the login screen.",
+    "category": "Logout",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the dashboard link"
+      },
+      {
+        "type": "action",
+        "description": "Use the logout action from the topbar"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user returns to the login page"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Create a student successfully",
+    "description": "Verifies that an admin can create a student and return to the updated student list.",
+    "category": "Student Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the student management area"
+      },
+      {
+        "type": "action",
+        "description": "Open the new student form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with Test Student Alpha"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid date into the birth date field"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the phone field with 5551234567"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with student.alpha@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Save the student"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the student list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the newly created student appears in the list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Register a payment for an enrollment",
+    "description": "This verifies that an admin can create a payment for an existing enrollment and see it appear in the payment list.",
+    "category": "Payment Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the payment management link"
+      },
+      {
+        "type": "action",
+        "description": "Open the payment creation form"
+      },
+      {
+        "type": "action",
+        "description": "Select an enrollment from the enrollment dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the amount field with 1000"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment method"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid payment date"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment status"
+      },
+      {
+        "type": "action",
+        "description": "Save the payment"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new payment appears in the payment list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Create a student enrollment for an active class",
+    "description": "Verifies an admin can create an enrollment by selecting an existing student and class and then see the enrollment in the list.",
+    "category": "Enrollment Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /estudiantes"
+      },
+      {
+        "type": "action",
+        "description": "Open the new student form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with Student Enrollment Target"
+      },
+      {
+        "type": "action",
+        "description": "Save the student"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /inscripciones"
+      },
+      {
+        "type": "action",
+        "description": "Open the new enrollment form"
+      },
+      {
+        "type": "action",
+        "description": "Select the newly created student"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid class"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid date into the enrollment date field"
+      },
+      {
+        "type": "action",
+        "description": "Choose an active status"
+      },
+      {
+        "type": "action",
+        "description": "Save the enrollment"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the enrollment list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new enrollment appears in the list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Record attendance for an active enrollment",
+    "description": "This verifies that an admin can create an attendance record for an enrollment and see it appear in the attendance list.",
+    "category": "Attendance Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the attendance management link"
+      },
+      {
+        "type": "action",
+        "description": "Open the attendance creation form"
+      },
+      {
+        "type": "action",
+        "description": "Select an active enrollment from the enrollment dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Fill in a valid class date"
+      },
+      {
+        "type": "action",
+        "description": "Select whether the student attended"
+      },
+      {
+        "type": "action",
+        "description": "Save the attendance record"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new attendance record appears in the attendance list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Create attendance for an enrollment",
+    "description": "Verifies an admin can record attendance for an enrollment and see the attendance entry in the list.",
+    "category": "Attendance Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /asistencias"
+      },
+      {
+        "type": "action",
+        "description": "Open the new attendance form"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid enrollment"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid date into the attendance date field"
+      },
+      {
+        "type": "action",
+        "description": "Choose an attendance status"
+      },
+      {
+        "type": "action",
+        "description": "Save the attendance record"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the attendance list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new attendance record appears in the list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC009",
+    "title": "Dashboard stats and quick access work",
+    "description": "Verifies that the admin can review dashboard summary data and use a quick access link to open a management area.",
+    "category": "Dashboard Stats",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the dashboard to load"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify summary stats are displayed"
+      },
+      {
+        "type": "action",
+        "description": "Click a quick access link to open a management section"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the management section is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC010",
+    "title": "Use a quick-access link from the dashboard",
+    "description": "Verifies an admin can use a dashboard shortcut to jump into a management area without leaving the app flow.",
+    "category": "Authentication",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click a quick-access link to a management area"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the target management page is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the management list content is displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC011",
+    "title": "Create a class with level and instructor assignments",
+    "description": "Verifies an admin can create a swim class by selecting a level and instructor and see it added to the class list.",
+    "category": "Class Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /clases"
+      },
+      {
+        "type": "action",
+        "description": "Open the new class form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the class name field with Advanced Lane 1"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid level"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid instructor"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the capacity field with 12"
+      },
+      {
+        "type": "action",
+        "description": "Save the class"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the class list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new class appears in the list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC012",
+    "title": "Filter payments by status",
+    "description": "This verifies that an admin can filter the payment list by status and see only matching records.",
+    "category": "Payment Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the payment management link"
+      },
+      {
+        "type": "action",
+        "description": "Select a payment status filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the payment list shows matching records for the selected status"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC013",
+    "title": "Search and paginate students",
+    "description": "Verifies that an admin can search for students and move between pages in the student list.",
+    "category": "Student Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the student management area"
+      },
+      {
+        "type": "action",
+        "description": "Search for a student by name or email"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the filtered student list is displayed"
+      },
+      {
+        "type": "action",
+        "description": "Move to the next page of students"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify additional student records are displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC014",
+    "title": "Filter enrollments by status",
+    "description": "Verifies an admin can filter the enrollment list by status and see only enrollments matching the chosen state.",
+    "category": "Enrollment Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /inscripciones"
+      },
+      {
+        "type": "action",
+        "description": "Select an enrollment status filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify enrollments matching the selected status are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify enrollments with other statuses are not displayed"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC015",
+    "title": "Update an enrollment status inline",
+    "description": "Verifies an admin can change an enrollment status directly from the list and see the updated status reflected.",
+    "category": "Enrollment Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /inscripciones"
+      },
+      {
+        "type": "action",
+        "description": "Change an enrollment status from the list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated enrollment status is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the enrollment remains in the list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC016",
+    "title": "Filter attendance by date",
+    "description": "This verifies that an admin can filter attendance records by date and review matching results.",
+    "category": "Attendance Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the attendance management link"
+      },
+      {
+        "type": "action",
+        "description": "Select a date filter"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the attendance list shows matching records for the selected date"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC017",
+    "title": "Create a new instructor",
+    "description": "Verifies an admin can create an instructor profile and return to the updated instructor list.",
+    "category": "Instructor Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /instructores"
+      },
+      {
+        "type": "action",
+        "description": "Open the new instructor form"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the name field with Marina Coach"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the specialty field with Technique"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with marina.coach@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Save the instructor"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the instructor list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new instructor appears in the list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC018",
+    "title": "Edit an instructor profile",
+    "description": "Verifies an admin can update an instructor and see the saved changes reflected in the list.",
+    "category": "Instructor Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /instructores"
+      },
+      {
+        "type": "action",
+        "description": "Open an instructor for editing"
+      },
+      {
+        "type": "action",
+        "description": "Update the instructor details"
+      },
+      {
+        "type": "action",
+        "description": "Save the changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated instructor list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the edited instructor appears with updated details"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC019",
+    "title": "Edit a student successfully",
+    "description": "Verifies that an admin can update a student record and see the updated list afterward.",
+    "category": "Student Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the student management area"
+      },
+      {
+        "type": "action",
+        "description": "Open an existing student for editing"
+      },
+      {
+        "type": "action",
+        "description": "Update the student details"
+      },
+      {
+        "type": "action",
+        "description": "Save the changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated student list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the saved student changes are visible in the list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC020",
+    "title": "Delete a student after confirmation",
+    "description": "Verifies that an admin can confirm student deletion and the student is removed from the list.",
+    "category": "Student Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the student management area"
+      },
+      {
+        "type": "action",
+        "description": "Choose a student to delete"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the student is removed from the list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC021",
+    "title": "Delete an instructor from the list",
+    "description": "Verifies an admin can confirm deletion of an instructor and see the instructor removed from the list.",
+    "category": "Instructor Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /instructores"
+      },
+      {
+        "type": "action",
+        "description": "Choose an instructor to delete"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the instructor is removed from the list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated instructor list remains visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC022",
+    "title": "Delete a payment entry",
+    "description": "This verifies that an admin can remove a payment after confirming the deletion and see it disappear from the list.",
+    "category": "Payment Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the payment management link"
+      },
+      {
+        "type": "action",
+        "description": "Choose a payment to delete"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the payment is removed from the payment list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC023",
+    "title": "Edit a class and update its assignments",
+    "description": "Verifies an admin can update a class record and see the refreshed details in the class list.",
+    "category": "Class Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /clases"
+      },
+      {
+        "type": "action",
+        "description": "Open a class for editing"
+      },
+      {
+        "type": "action",
+        "description": "Update the class details"
+      },
+      {
+        "type": "action",
+        "description": "Save the changes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the updated class list is displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the edited class appears with updated details"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC024",
+    "title": "Delete an attendance record",
+    "description": "This verifies that an admin can delete an attendance entry after confirming the action and see it removed from the list.",
+    "category": "Attendance Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the attendance management link"
+      },
+      {
+        "type": "action",
+        "description": "Choose an attendance record to delete"
+      },
+      {
+        "type": "action",
+        "description": "Confirm the deletion"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the attendance record is removed from the attendance list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC025",
+    "title": "Student form validates required fields",
+    "description": "Verifies that leaving required student fields empty prevents saving and shows validation feedback.",
+    "category": "Student Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open the student management area"
+      },
+      {
+        "type": "action",
+        "description": "Open the new student form"
+      },
+      {
+        "type": "action",
+        "description": "Save the student without filling required fields"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify required field validation messages are visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC026",
+    "title": "Search instructors by name",
+    "description": "Verifies an admin can filter the instructor list by a name search and see only matching results.",
+    "category": "Instructor Management",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Navigate to /instructores"
+      },
+      {
+        "type": "action",
+        "description": "Search for an instructor by name"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify matching instructors are displayed"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify non-matching instructors are not displayed"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC027",
+    "title": "Invalid login shows an error",
+    "description": "Verifies that incorrect credentials are rejected and an invalid credentials message is shown.",
+    "category": "User Login",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with invalid@example.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with wrong-password"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an invalid credentials message is visible"
+      }
+    ],
+    "priority": "Low"
+  }
+]

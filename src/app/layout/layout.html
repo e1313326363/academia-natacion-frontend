@@ -1,0 +1,15 @@
+<div class="layout-wrapper">
+  <app-sidebar [open]="sidebarOpen" (closed)="sidebarOpen=false"></app-sidebar>
+  <div class="main-content">
+    <app-topbar (menuToggle)="sidebarOpen=!sidebarOpen"></app-topbar>
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+
+<!-- overlay mobile -->
+<div class="position-fixed top-0 start-0 w-100 h-100 d-md-none"
+     style="background:rgba(0,0,0,0.4);z-index:999;"
+     *ngIf="sidebarOpen" (click)="sidebarOpen=false">
+</div>

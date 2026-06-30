@@ -1,1 +1,116 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+
+:root {
+  --primary: #0d6efd;
+  --sidebar-width: 260px;
+  --header-height: 60px;
+}
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background: #f0f2f5;
+  color: #333;
+}
+
+/* Layout */
+.layout-wrapper { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: var(--sidebar-width);
+  min-height: 100vh;
+  background: linear-gradient(180deg, #1a1f3a 0%, #2d3561 100%);
+  color: #fff;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+
+  .sidebar-brand {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    h5 { margin: 0; font-weight: 700; font-size: 1rem; }
+    small { opacity: 0.6; font-size: 0.75rem; }
+  }
+
+  .nav-link {
+    color: rgba(255,255,255,0.7);
+    padding: 0.65rem 1.5rem;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    &:hover, &.active {
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+    }
+    i { font-size: 1.1rem; }
+  }
+
+  .nav-section {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.4);
+    padding: 1rem 1.5rem 0.25rem;
+  }
+}
+
+.main-content {
+  margin-left: var(--sidebar-width);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.topbar {
+  height: var(--header-height);
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 500;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.page-content { padding: 1.5rem; }
+
+/* Cards */
+.stat-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s;
+  &:hover { transform: translateY(-2px); }
+}
+
+/* Tables */
+.table-card {
+  border: none;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+}
+
+/* Badges */
+.badge-activo    { background: #d1fae5; color: #065f46; }
+.badge-baja      { background: #fee2e2; color: #991b1b; }
+.badge-suspendido{ background: #fef3c7; color: #92400e; }
+.badge-pagado    { background: #d1fae5; color: #065f46; }
+.badge-pendiente { background: #fef3c7; color: #92400e; }
+.badge-vencido   { background: #fee2e2; color: #991b1b; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); }
+  .main-content { margin-left: 0; }
+}
+

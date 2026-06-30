@@ -1,0 +1,16 @@
+<div class="modal d-block" tabindex="-1" style="background:rgba(0,0,0,0.5);z-index:1055" *ngIf="visible" (click)="$event.stopPropagation()">
+  <div class="modal-dialog modal-dialog-centered" (click)="$event.stopPropagation()">
+    <div class="modal-content border-0 shadow">
+      <div class="modal-header border-0 pb-0">
+        <h5 class="modal-title"><i class="bi bi-exclamation-triangle text-warning me-2"></i>Confirmar acción</h5>
+      </div>
+      <div class="modal-body py-3">{{ message }}</div>
+      <div class="modal-footer border-0 pt-0">
+        <button type="button" class="btn btn-outline-secondary" (click)="cancelled.emit(); $event.stopPropagation()">Cancelar</button>
+        <button type="button" class="btn btn-danger" (click)="confirmed.emit(); $event.stopPropagation()">
+          <i class="bi bi-trash me-1"></i>Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h4 class="fw-bold mb-0">Pagos</h4><small class="text-muted">Control de mensualidades</small></div>
+  <a routerLink="nuevo" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Registrar pago</a>
+</div>
+<div class="card table-card">
+  <div class="card-header bg-white py-3 d-flex gap-2">
+    <select class="form-select" style="max-width:200px" [(ngModel)]="estadoFiltro" (change)="load()">
+      <option value="">Todos los estados</option>
+      <option value="Pagado">Pagado</option>
+      <option value="Pendiente">Pendiente</option>
+      <option value="Vencido">Vencido</option>
+    </select>
+  </div>
+  <div class="text-center py-5" *ngIf="loading"><div class="spinner-border text-primary"></div></div>
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr><th>#</th><th>Estudiante</th><th class="text-end">Monto</th><th>Método</th><th>Fecha</th><th class="text-center">Estado</th><th class="text-center">Acciones</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of data?.data">
+          <td class="text-muted small">{{ p.id_pago }}</td>
+          <td class="fw-semibold">{{ p.inscripcion?.estudiante?.nombre }}</td>
+          <td class="text-end fw-semibold">${{ p.monto | number:'1.2-2' }}</td>
+          <td><span class="badge bg-secondary bg-opacity-15 text-secondary">{{ p.metodo_pago }}</span></td>
+          <td>{{ p.fecha_pago | date:'dd/MM/yyyy' }}</td>
+          <td class="text-center">
+            <span class="badge rounded-pill px-3 py-2"
+              [class.badge-pagado]="p.estado==='Pagado'"
+              [class.badge-pendiente]="p.estado==='Pendiente'"
+              [class.badge-vencido]="p.estado==='Vencido'">
+              {{ p.estado }}
+            </span>
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(p.id_pago)"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+        <tr *ngIf="!data?.data?.length"><td colspan="7" class="text-center text-muted py-4">No hay pagos registrados.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3" *ngIf="data">
+    <small class="text-muted">Total: {{ data.total }}</small>
+    <div class="d-flex gap-1">
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===1" (click)="load(data.current_page-1)"><i class="bi bi-chevron-left"></i></button>
+      <span class="btn btn-sm btn-primary disabled">{{ data.current_page }} / {{ data.last_page }}</span>
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===data.last_page" (click)="load(data.current_page+1)"><i class="bi bi-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+<app-confirm-dialog [visible]="showConfirm" (confirmed)="doDelete()" (cancelled)="showConfirm=false"></app-confirm-dialog>

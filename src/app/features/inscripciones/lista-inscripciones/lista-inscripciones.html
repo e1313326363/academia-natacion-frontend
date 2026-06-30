@@ -1,0 +1,54 @@
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div><h4 class="fw-bold mb-0">Inscripciones</h4><small class="text-muted">Alumnos inscritos en clases</small></div>
+  <a routerLink="nueva" class="btn btn-primary"><i class="bi bi-plus-lg me-1"></i>Nueva inscripción</a>
+</div>
+<div class="card table-card">
+  <div class="card-header bg-white py-3 d-flex gap-2">
+    <select class="form-select" style="max-width:200px" [(ngModel)]="estadoFiltro" (change)="load()">
+      <option value="">Todos los estados</option>
+      <option value="Activo">Activo</option>
+      <option value="Suspendido">Suspendido</option>
+      <option value="Baja">Baja</option>
+    </select>
+  </div>
+  <div class="text-center py-5" *ngIf="loading"><div class="spinner-border text-primary"></div></div>
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr><th>#</th><th>Estudiante</th><th>Clase</th><th>Fecha</th><th class="text-center">Estado</th><th class="text-center">Acciones</th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let i of data?.data">
+          <td class="text-muted small">{{ i.id_inscripcion }}</td>
+          <td class="fw-semibold">{{ i.estudiante?.nombre }}</td>
+          <td>{{ i.clase?.nombre_clase }}</td>
+          <td>{{ i.fecha_inscripcion | date:'dd/MM/yyyy' }}</td>
+          <td class="text-center">
+            <span class="badge rounded-pill px-3 py-2"
+              [class.badge-activo]="i.estado==='Activo'"
+              [class.badge-suspendido]="i.estado==='Suspendido'"
+              [class.badge-baja]="i.estado==='Baja'">
+              {{ i.estado }}
+            </span>
+          </td>
+          <td class="text-center d-flex gap-1 justify-content-center">
+            <select class="form-select form-select-sm" style="width:130px" [value]="i.estado" (change)="cambiarEstado(i.id_inscripcion, $any($event.target).value)">
+              <option>Activo</option><option>Suspendido</option><option>Baja</option>
+            </select>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(i.id_inscripcion)"><i class="bi bi-trash"></i></button>
+          </td>
+        </tr>
+        <tr *ngIf="!data?.data?.length"><td colspan="6" class="text-center text-muted py-4">No hay inscripciones.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3" *ngIf="data">
+    <small class="text-muted">Total: {{ data.total }}</small>
+    <div class="d-flex gap-1">
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===1" (click)="load(data.current_page-1)"><i class="bi bi-chevron-left"></i></button>
+      <span class="btn btn-sm btn-primary disabled">{{ data.current_page }} / {{ data.last_page }}</span>
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page===data.last_page" (click)="load(data.current_page+1)"><i class="bi bi-chevron-right"></i></button>
+    </div>
+  </div>
+</div>
+<app-confirm-dialog [visible]="showConfirm" (confirmed)="doDelete()" (cancelled)="showConfirm=false"></app-confirm-dialog>

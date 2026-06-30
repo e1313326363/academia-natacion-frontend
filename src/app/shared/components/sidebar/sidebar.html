@@ -1,0 +1,38 @@
+<nav class="sidebar" [class.open]="open">
+  <div class="sidebar-brand d-flex align-items-center">
+    <i class="bi bi-water fs-3 text-info me-2"></i>
+    <div>
+      <h5>Academia</h5>
+      <small>Natación</small>
+    </div>
+  </div>
+
+  <div class="pt-2">
+    <div class="nav-section">Principal</div>
+    <a routerLink="/dashboard" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-speedometer2"></i> Dashboard
+    </a>
+
+    <div class="nav-section">Gestión</div>
+    <a routerLink="/estudiantes" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-people"></i> Estudiantes
+    </a>
+    <a routerLink="/instructores" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-person-badge"></i> Instructores
+    </a>
+    <a routerLink="/clases" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-journal-text"></i> Clases
+    </a>
+    <a routerLink="/inscripciones" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-clipboard-check"></i> Inscripciones
+    </a>
+
+    <div class="nav-section">Control</div>
+    <a routerLink="/pagos" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-cash-stack"></i> Pagos
+    </a>
+    <a routerLink="/asistencias" routerLinkActive="active" class="nav-link" (click)="close()">
+      <i class="bi bi-calendar-check"></i> Asistencias
+    </a>
+  </div>
+</nav>

@@ -1,0 +1,82 @@
+<div class="alert alert-danger alert-dismissible py-2" *ngIf="deleteError">
+  {{ deleteError }}
+  <button type="button" class="btn-close" (click)="deleteError=''"></button>
+</div>
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h4 class="fw-bold mb-0">Estudiantes</h4>
+    <small class="text-muted">Gestión de alumnos registrados</small>
+  </div>
+  <a routerLink="nuevo" class="btn btn-primary">
+    <i class="bi bi-plus-lg me-1"></i>Nuevo estudiante
+  </a>
+</div>
+
+<div class="card table-card">
+  <div class="card-header bg-white py-3 d-flex gap-2">
+    <input type="text" class="form-control" style="max-width:300px"
+           placeholder="Buscar por nombre o email…"
+           [(ngModel)]="search" (keyup.enter)="load()">
+    <button class="btn btn-outline-secondary" (click)="load()">
+      <i class="bi bi-search"></i>
+    </button>
+  </div>
+
+  <div class="text-center py-5" *ngIf="loading">
+    <div class="spinner-border text-primary"></div>
+  </div>
+
+  <div class="table-responsive" *ngIf="!loading">
+    <table class="table table-hover align-middle mb-0">
+      <thead class="table-light">
+        <tr>
+          <th>#</th>
+          <th>Nombre</th>
+          <th>Edad</th>
+          <th>Teléfono</th>
+          <th>Email</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of data?.data">
+          <td class="text-muted small">{{ e.id_estudiante }}</td>
+          <td class="fw-semibold">{{ e.nombre }}</td>
+          <td>{{ calcEdad(e.fecha_nacimiento) }} años</td>
+          <td>{{ e.telefono || '—' }}</td>
+          <td>{{ e.email || '—' }}</td>
+          <td class="text-center">
+            <a [routerLink]="['editar', e.id_estudiante]" class="btn btn-sm btn-outline-primary me-1">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <button class="btn btn-sm btn-outline-danger" (click)="confirmDelete(e.id_estudiante)">
+              <i class="bi bi-trash"></i>
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="!data?.data?.length">
+          <td colspan="6" class="text-center text-muted py-4">No se encontraron estudiantes.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card-footer bg-white d-flex justify-content-between align-items-center py-3" *ngIf="data">
+    <small class="text-muted">Total: {{ data.total }} registros</small>
+    <div class="d-flex gap-1">
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page === 1"
+              (click)="load(data.current_page - 1)">
+        <i class="bi bi-chevron-left"></i>
+      </button>
+      <span class="btn btn-sm btn-primary disabled">{{ data.current_page }} / {{ data.last_page }}</span>
+      <button class="btn btn-sm btn-outline-secondary" [disabled]="data.current_page === data.last_page"
+              (click)="load(data.current_page + 1)">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-confirm-dialog [visible]="showConfirm"
+  (confirmed)="doDelete()" (cancelled)="showConfirm=false">
+</app-confirm-dialog>

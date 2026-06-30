@@ -1,0 +1,57 @@
+<div class="d-flex align-items-center gap-2 mb-4">
+  <a routerLink="/estudiantes" class="btn btn-sm btn-outline-secondary">
+    <i class="bi bi-arrow-left"></i>
+  </a>
+  <div>
+    <h4 class="fw-bold mb-0">{{ editId ? 'Editar' : 'Nuevo' }} Estudiante</h4>
+    <small class="text-muted">{{ editId ? 'Actualiza los datos del alumno' : 'Registra un nuevo alumno' }}</small>
+  </div>
+</div>
+
+<div class="card border-0 shadow-sm" style="max-width:600px;border-radius:12px;">
+  <div class="card-body p-4">
+    <div class="text-center py-4" *ngIf="loading">
+      <div class="spinner-border text-primary"></div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!loading">
+      <div class="alert alert-danger py-2" *ngIf="error">{{ error }}</div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Nombre completo <span class="text-danger">*</span></label>
+        <input type="text" class="form-control" formControlName="nombre"
+               [class.is-invalid]="f['nombre'].invalid && f['nombre'].touched">
+        <div class="invalid-feedback">El nombre es obligatorio.</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Fecha de nacimiento <span class="text-danger">*</span></label>
+        <input type="date" class="form-control" formControlName="fecha_nacimiento"
+               [class.is-invalid]="f['fecha_nacimiento'].invalid && f['fecha_nacimiento'].touched">
+        <div class="invalid-feedback">La fecha de nacimiento es obligatoria.</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Teléfono</label>
+        <input type="text" class="form-control" formControlName="telefono" placeholder="+506 8888-8888">
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-semibold">Email</label>
+        <input type="email" class="form-control" formControlName="email"
+               [class.is-invalid]="f['email'].invalid && f['email'].touched"
+               placeholder="correo@ejemplo.com">
+        <div class="invalid-feedback">Ingresa un email válido.</div>
+      </div>
+
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary px-4" [disabled]="saving">
+          <span *ngIf="saving" class="spinner-border spinner-border-sm me-2"></span>
+          <i class="bi bi-check-lg me-1" *ngIf="!saving"></i>
+          {{ saving ? 'Guardando...' : 'Guardar' }}
+        </button>
+        <a routerLink="/estudiantes" class="btn btn-outline-secondary">Cancelar</a>
+      </div>
+    </form>
+  </div>
+</div>
