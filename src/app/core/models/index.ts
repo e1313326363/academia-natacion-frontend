@@ -77,7 +77,9 @@ export interface PaginatedResponse<T> {
 }
 
 export interface DashboardStats {
-  total_estudiantes: number;
+  estudiantes: number;
+  instructores: number;
+  clases: number;
   inscripciones_activas: number;
   pagos_pendientes: number;
   pagos_mes: number;

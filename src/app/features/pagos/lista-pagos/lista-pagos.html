@@ -22,7 +22,7 @@
           <td class="text-muted small">{{ p.id_pago }}</td>
           <td class="fw-semibold">{{ p.inscripcion?.estudiante?.nombre }}</td>
           <td class="text-end fw-semibold">${{ p.monto | number:'1.2-2' }}</td>
-          <td><span class="badge bg-secondary bg-opacity-15 text-secondary">{{ p.metodo_pago }}</span></td>
+          <td><span class="badge bg-secondary">{{ p.metodo_pago }}</span></td>
           <td>{{ p.fecha_pago | date:'dd/MM/yyyy' }}</td>
           <td class="text-center">
             <span class="badge rounded-pill px-3 py-2"
