@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://web-production-3aea2.up.railway.app/api'
+  apiUrl: 'https://academia-natacion-backend-production.up.railway.app/api'
 };
